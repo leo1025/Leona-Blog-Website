@@ -5,7 +5,7 @@
 ### Initial Steps
 - ~~Initialize Project Repo~~
 - ~~Create Nuxt Project~~
-- Setup App Engine on Google Cloud
+- ~~Setup App Engine on Google Cloud~~
 - Setup CI/CD with Github Actions
 
 ### Home page
