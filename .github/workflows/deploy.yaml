@@ -22,7 +22,7 @@ jobs:
         run: cd ./leona-blog && npm ci
 
       - name: Build Nuxt.js app
-        run: npm run build
+        run: cd ./leona-blog && npm run build
 
       - name: Deploy to VM
         uses: appleboy/ssh-action@master
