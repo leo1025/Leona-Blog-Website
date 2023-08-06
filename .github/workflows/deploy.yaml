@@ -24,21 +24,16 @@ jobs:
       - name: Build Nuxt.js app
         run: cd ./leona-blog && npm run build
 
-      - name: Deploy to VM
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            # Copy the built Nuxt.js app to the VM
-            scp -r ./leona-blog/.output ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/leona-blog
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-            # Install Nuxt.js app dependencies on the VM (if applicable)
-            # If your app doesn't require any additional dependencies, you can skip this step
-            ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /leona-blog && npm install'
+      - name: Copy build to server
+        run: |
+          rsync -vrm ./leona-blog/.output/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/leona-blog
 
-            # Restart the Nuxt.js app on the VM using pm2 (or any other process manager you use)
-            # Replace 'APP_NAME' and 'APP_ENTRY_FILE' with the appropriate values for your app
-            ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /leona-blog && pm2 stop leona-blog || true && pm2 delete leona-blog || true'
-            ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /leona-blog && pm2 start index.mjs --name leona-blog'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /leona-blog && pm2 stop leona-blog || true && pm2 delete leona-blog || true'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /leona-blog && pm2 restart index.mjs --name leona-blog'
