@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Nuxt.js dependencies
-        run: cd ./leona-blog && npm ci
+        run: cd ~/leona-blog && npm ci
 
       - name: Build Nuxt.js app
-        run: cd ./leona-blog && npm run build
+        run: cd ~/leona-blog && npm run build
 
       - name: Setup SSH
         run: |
@@ -30,7 +30,7 @@ jobs:
 
       - name: Copy build to server
         run: |
-          rsync -vrm ./leona-blog/.dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/leona-blog
+          rsync -vrm ~/leona-blog/.dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/leona-blog
 
       - name: Restart NodeJS
         run: |
