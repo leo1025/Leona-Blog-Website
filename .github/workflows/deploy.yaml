@@ -28,18 +28,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa.pub
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Stop PM2 app
+      - name: Copy build to server
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 delete leona-blog'
+          rsync -vrm ./leona-blog/.output/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/leona-blog
 
-      - name: Delete old build
+      - name: Restart NodeJS
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf ~/leona-blog/*'
-
-      - name: Copy new build to server
-        run: |
-          rsync -vrm ./leona-blog/dist/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/leona-blog
-
-      - name: Start new PM2 instance
-        run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/leona-blog && pm2 start npm --name "leona-blog" -- start'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/leona-blog/server && pm2 restart leona-blog'
