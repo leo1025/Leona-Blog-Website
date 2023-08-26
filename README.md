@@ -6,7 +6,7 @@
 - ~~Initialize Project Repo~~
 - ~~Create Nuxt Project~~
 - ~~Setup App Engine on Google Cloud~~
-- ~~Setup CI/CD with Github Actions~~
+- Setup CI/CD with Github Actions
 
 ### Home page
 - Add persistent responsive navbar
