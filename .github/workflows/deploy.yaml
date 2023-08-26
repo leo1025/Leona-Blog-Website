@@ -30,6 +30,10 @@ jobs:
 
       - name: Stop old PM2 app
         run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 delete leona-blog'
+
+      - name: Stop old PM2 app (double-check)
+        run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'pm2 stop leona-blog'
 
       - name: Delete old build contents
