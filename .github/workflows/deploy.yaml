@@ -34,4 +34,4 @@ jobs:
 
       - name: Restart NodeJS
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/leona-blog/server && pm2 restart leona-blog'
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/leona-blog && pm2 restart leona-blog'
