@@ -1,6 +1,11 @@
 <template>
-  <div>
-    <navbar />
-    <NuxtPage />
-  </div>
+  <main>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </main>
 </template>
+
+<script>
+  import 'dotenv/config'
+</script>

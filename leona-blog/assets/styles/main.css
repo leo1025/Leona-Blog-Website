@@ -1,0 +1,22 @@
+html, body, main {
+    background-color: rgb(57, 57, 57);
+    color: rgb(241, 241, 241) !important;
+    text-align: center;
+}
+
+.bg-main {
+    background-color: rgb(38, 38, 38);
+}
+
+.nav-link, .navbar-brand { 
+    color: rgb(241, 241, 241) !important;
+}
+
+.spread {
+    height: 90vh;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
