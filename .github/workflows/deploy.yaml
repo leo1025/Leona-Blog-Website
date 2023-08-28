@@ -27,6 +27,8 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa.pub
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        env:
+          GIT_SSH_COMMAND: ssh -v
 
       - name: Check if folder exists
         run: |
