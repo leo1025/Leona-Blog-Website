@@ -28,6 +28,26 @@ jobs:
           chmod 600 ~/.ssh/id_rsa.pub
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+      - name: Check if folder exists
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'if [ -d ~/leona-blog ]; then echo "Folder exists"; else echo "Folder does not exist"; fi'
+        id: check_folder
+
+      - name: Check if app is running
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'if pm2 describe leona-blog &> /dev/null; then echo "App is running"; else echo "App is not running"; fi'
+        id: check_app
+
+      - name: Stop NodeJS (if running)
+        if: steps.check_app.outputs.check_app == 'App is running'
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd ~/leona-blog/server && pm2 stop leona-blog'
+
+      - name: Delete old binaries (if folder exists)
+        if: steps.check_folder.outputs.check_folder == 'Folder exists'
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf ~/leona-blog/.output'
+
       - name: Copy build to server
         run: |
           rsync -vrm ./leona-blog/.output/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:~/leona-blog
