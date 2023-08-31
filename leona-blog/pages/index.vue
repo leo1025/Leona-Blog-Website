@@ -5,7 +5,7 @@
       <h5>I'm a Software Engineer and Digital Artist. </h5>
     </div>
     <div>
-      This is the stuff I've been working on. Feel free to follow the links and explore.
+      Here's some things I've been working on. Feel free to follow the links and explore.
       <div>
           FEATURED PROJECT
           <div>
