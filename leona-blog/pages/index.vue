@@ -1,28 +1,23 @@
 <template>
-  <div class="spread container-fluid">
-    <div>
-      <h1>Hi there, I'm Leona</h1>
-      <h5>I'm a Software Engineer and Digital Artist. </h5>
-    </div>
-    <div>
-      Here's some things I've been working on. Feel free to follow the links and explore.
-      <div>
-          FEATURED PROJECT
-          <div>
-            <h5>{{ projectPost.title }}</h5>
-            <img :src="projectPost.feature_image" alt="">
-            <p>{{ projectPost.excerpt }}</p>
-          </div>
-          <NuxtLink to="/projects">Projects</NuxtLink>
+  <div class="container-fluid w-75">
+    <div class="row text-left p-5 vh-100">
+      <div class="col">
+        <h1>Hi there, I'm <strong>Leona</strong></h1>
+        <p>I'm a Software Engineer and Digital Artist. </p>
       </div>
-      <div>
-          FEATURED POST
-          <div>
-            <h5>{{ journalPost.title }}</h5>
-            <img :src="journalPost.feature_image" alt="">
-            <p>{{ journalPost.excerpt }}</p>
-          </div>
-          <NuxtLink to="/journal">Journal</NuxtLink>
+      <div class="col">
+
+      </div>
+    </div>
+    <div class="row p-1">
+      <div class="text-center py-2 my-3 sub-title">
+        <h3>Recent Projects and Posts</h3>
+      </div>
+      <div class="col">
+          <card v-bind:data="projectPost" />
+      </div>
+      <div class="col">
+          <card v-bind:data="journalPost" />
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 <template>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-main">
-            <div class="container-fluid">
+            <div class="container-fluid px-5">
                 <NuxtLink class="navbar-brand" to="/"><strong>La Leona</strong></NuxtLink>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

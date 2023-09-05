@@ -7,10 +7,15 @@
 
 <template>
     <NuxtLink :to="'/posts/' + data.slug">
-        <div>
+        <div class="">
             <img :src="data.feature_image" alt="">
             <h3>{{ data.title }}</h3>
-            <p>{{ data.excerpt }}</p>
         </div>
     </NuxtLink>
 </template>
+
+<style>
+    NuxtLink {
+        background-color: rgb(13, 107, 0);
+    }
+</style>

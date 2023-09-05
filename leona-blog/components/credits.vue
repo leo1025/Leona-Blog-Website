@@ -1,5 +1,7 @@
 <template>
     <footer>
-        <p>© 2023 - Design and developed by Leona DA</p>
+        <div class="container text-center py-2">
+            <p class="fs-6">Copyright © 2023</p>
+        </div>
     </footer>
 </template>
